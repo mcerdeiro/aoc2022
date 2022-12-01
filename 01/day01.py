@@ -1,17 +1,21 @@
 import collections
 import itertools
+from os.path import exists
 
-p1 = p2 = 0
+file = 'in.in'
+if not exists(file):
+    file = '2022/01/' + file
+lines = open(file).read().splitlines()
 
-lines = open('in.in').read().splitlines()
-
-vals = [int(x) for x in lines]
+E = []
+elve = []
 for line in lines:
-    pass
+    if line == '':
+        E.append(sum(elve))
+        elve = []
+        continue
+    elve.append(int(line))
 
-
-
-print(vals)
-
-print('part1', p1)
-print('part2', p2)
+E = sorted(E)
+print('Part1:', max(E))
+print('Part2:', sum(E[-3:]))
