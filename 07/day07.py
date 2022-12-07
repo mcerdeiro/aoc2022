@@ -37,10 +37,14 @@ while i < len(lines):
         if 'dir' != sizeType:
             sizeType = int(sizeType)
         contains[name] = sizeType
-        if sizeType == 'dir':
-            ROOT.append(('/'.join(location) + '/' + name + '/', 0))
+        if len(location) > 0:
+            path = '/' + '/'.join(location) + '/' + name
         else:
-            ROOT.append(('/'.join(location) + '/' + name, int(sizeType)))
+            path = '/' + name
+        if sizeType == 'dir':
+            ROOT.append((path + '/', 0))
+        else:
+            ROOT.append((path, int(sizeType)))
 
     i += 1
 
@@ -65,6 +69,7 @@ for d in ROOT:
         totalusedspace += d[1]
 
 print('Part1:', p1)
+# print(ROOT)
 
 goal = 30000000-(70000000-totalusedspace)
 current = 100000000000
